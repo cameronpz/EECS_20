@@ -1,0 +1,18 @@
+; Program for Finding First 1 in a 16-bit word (checking from MSB->LSB)
+;
+; R1: counter
+; R2: current value
+
+0011 0000 0000 0000     ; start at x3000
+
+0101 001 001 1 00000    ; R1 <- 0
+0001 001 001 1 01111    ; R1 <- R1 + 15
+1010 010 000000111      ; R2 <- M[M[x300A]]..6 because x3002+1+6 = x3009
+0000 100 000000101      ; BRn x3009         - there is a 1 in the MSB already, done!
+0001 001 001 1 11111    ; R1 <- R1 - 1      - there was a 0 in MSB, decrement counter
+0000 100 000000011      ; BRn x3009         - if counter is negative, end
+0001 010 010 0 00 010   ; R2 <- R2 + R2     - shift left
+0000 100 000000001      ; BRn x3009         - Check if MSB is negative
+0000 111 111111011      ; BRnzp x3004       - # is not negative, continue decrementing
+1111 0000 0010 0101     ; HALT
+0011 0100 0000 0000     ; x3400 (hardcoded value)
