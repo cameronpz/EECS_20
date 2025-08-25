@@ -15,4 +15,5 @@
 0000 100 000000001      ; BRn x3009         - Check if MSB is negative
 0000 111 111111011      ; BRnzp x3004       - # is not negative, continue decrementing
 1111 0000 0010 0101     ; HALT
+
 0011 0100 0000 0000     ; x3400 (hardcoded value)
